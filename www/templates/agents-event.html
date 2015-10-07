@@ -1,0 +1,67 @@
+<ion-view id="agent-events" view-title="Agents">
+<!--
+<ion-nav-bar>
+  <ion-nav-back-button>
+  </ion-nav-back-button>
+</ion-nav-bar>
+-->
+    <ion-content class="has-header">
+        <ion-list>
+<!--<div ng-controller="AgentsEventCtrl">-->
+            <ion-item class="agent-summary-header">
+                <div class="ui grid">
+                    <div class="sixteen wide column text-left" ng-click="">
+                        <strong>PersonInCharge</strong>
+                    </div>
+                </div>
+            </ion-item>
+            <ion-item class="agent-summary">
+                <div class="ui grid">
+                    <div class="sixteen wide column text-left" ng-click="click(personInCharge)">
+                        <strong>{{personInCharge.FullName || '-'}}</strong>
+                    </div>
+                </div>
+            </ion-item>
+            <ion-item class="agent-summary-header">
+                <div class="ui grid">
+                    <div class="eight wide column text-left" ng-click="toggleSortKey('User.FullName')">
+                        <strong>FullName&nbsp;<i ng-show="isSortedBy('User.FullName')" class="icon ion-arrow-up-b"></i></strong>
+                    </div>
+                    <div class="three wide column text-center" ng-click="toggleSortKey('RoadShow.TotalUnitSaleInPeriod')">
+                        <strong>TUS&nbsp;<i ng-show="isSortedBy('RoadShow.TotalUnitSaleInPeriod')" class="icon ion-arrow-up-b"></i></strong>
+                    </div>
+                    <div class="five wide column text-right" ng-click="toggleSortKey('RoadShow.TotalSaleInPeriod')">
+                        <strong>TotalSales&nbsp;<i ng-show="isSortedBy('RoadShow.TotalSaleInPeriod')" class="icon ion-arrow-up-b"></i></strong>
+                    </div>
+                </div>
+            </ion-item>
+            <ion-item ng-repeat="agent in agents | orderBy:sortKeys" class="agent-summary">
+                <div class="ui grid">
+                    <div class="eight wide column">
+                        {{agent.User.FullName}}
+                    </div>
+                    <div class="three wide column text-center">
+                        {{(agent.RoadShowTotalUnitSaleInPeriod || 0)}}
+                    </div>
+                    <div class="five wide column text-right">
+                        {{(agent.RoadShowTotalSaleInPeriod || 0) | currency:'RM ':0}} 
+                    </div>
+                </div>
+            </ion-item>
+            <ion-item class="agent-summary-footer">
+                <div class="ui grid">
+                    <div class="eight wide column">
+                        
+                    </div>
+                    <div class="three wide column text-center">
+                        <strong>{{getTotalTotalUnitSaleInPeriod()}}</strong>
+                    </div>
+                    <div class="five wide column text-right">
+                        <strong>{{getTotalTotalSaleInPeriod() | currency:'RM ':0}}</strong>
+                    </div>
+                </div>
+            </ion-item>
+<!--</div>-->
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,41 @@
+<ion-view id="costitems-event" view-title="Cost Items">
+<!--
+<ion-nav-bar>
+  <ion-nav-back-button>
+  </ion-nav-back-button>
+</ion-nav-bar>
+-->
+    <ion-content class="has-header">
+        <ion-list>
+            <ion-item class="agent-summary-header">
+                <div class="ui grid">
+                    <div class="eight wide column text-left" ng-click="toggleSortKey('EventCostDetailTitle')">
+                        <strong>ItemName&nbsp;<i ng-show="isSortedBy('EventCostDetailTitle')" class="icon ion-arrow-up-b"></i></strong>
+                    </div>
+                    <div class="eight wide column text-right" ng-click="toggleSortKey('EventCostDetailAmount')">
+                        <strong>Cost&nbsp;<i ng-show="isSortedBy('EventCostDetailAmount')" class="icon ion-arrow-up-b"></i></strong>
+                    </div>
+                </div>
+            </ion-item>
+            <ion-item ng-repeat="detail in details | orderBy:sortKeys" class="agent-summary">
+                <div class="ui grid">
+                    <div class="eight wide column">
+                        {{detail.EventCostDetailTitle }}
+                    </div>
+                    <div class="eight wide column text-right">
+                        {{(detail.EventCostDetailAmount || 0) | currency:'RM ':0}} 
+                    </div>
+                </div>
+            </ion-item>
+            <ion-item class="agent-summary-footer">
+                <div class="ui grid">
+                    <div class="eight wide column text-center">
+                    </div>
+                    <div class="eight wide column text-right">
+                        <strong>{{getTotalEventCostDetailAmount() | currency:'RM ':0}}</strong>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,23 @@
+{
+  "name": "HelloIonic",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.1.0"
+  },
+  "dependencies": {
+    "fontawesome": "~4.4.0",
+    "angular-resource": "~1.4.3",
+    "sprintf": "~1.0.3",
+    "underscore": "~1.8.3",
+    "ngCordova": "~0.1.19-alpha",
+    "angular-filter": "~0.5.5",
+    "jquery": "~2.1.4",
+    "angular-animate": "~1.4.5",
+    "animate.css": "~3.4.0",
+    "angular-google-maps": "~2.2.1",
+    "angular-bind-html-compile": "~1.1.0",
+    "ng-onload": "~0.2.1",
+    "semantic-ui": "~2.1.4",
+    "semantic-ui-sass": "*"
+  }
+}

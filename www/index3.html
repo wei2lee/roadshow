@@ -1,0 +1,222 @@
+<html ng-app="ionicApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Ionic</title>
+    <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
+    <script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
+  </head>
+  <body>
+    <ion-nav-bar class="bar-positive">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-nav-view name="main">
+    </ion-nav-view>
+  </body>
+</html>
+
+<script type="text/ng-template" id="home.html">
+  <ion-view title="Home">
+    <ion-content>
+      
+      <div class="list">
+        <a class="item item-icon-right" ng-repeat="country in countries" ui-sref="country">
+          {{country.name}}
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </div>
+      
+    </ion-content>
+  </ion-view>
+</script>
+
+<script type="text/ng-template" id="country.html">
+  <ion-view title="Country">
+    <ion-content>
+     
+      <div class="list">
+        <a class="item item-icon-right" ng-repeat="city in cities" ui-sref="city">
+          {{city.name}}
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </div>
+      
+    </ion-content>
+  </ion-view>
+</script>
+
+<script type="text/ng-template" id="city.html">
+  <ion-view title="City">
+    <ion-content>
+     
+      <div class="list">
+        <a class="item item-icon-right" ng-repeat="restaurant in restaurants" ui-sref="restaurant">
+          {{restaurant.name}}
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </div>
+      
+    </ion-content>
+  </ion-view>
+</script>
+
+<script type="text/ng-template" id="restaurant.html">
+  <ion-view title="Restaurant">
+    <ion-pane>
+      
+      <ion-tabs class="tabs-positive tabs-icon-only">
+        <ion-tab title="Home" icon="ion-ios-home" ui-sref="restaurant-home">
+          <ion-nav-view name="home-tab"></ion-nav-view>
+        </ion-tab>
+        <ion-tab title="Menu" icon="ion-pizza" ui-sref="restaurant-menu">
+          <ion-nav-view name="menu-tab"></ion-nav-view>
+        </ion-tab>
+        <ion-tab title="Contact" icon="ion-email" ui-sref="restaurant-contact">
+          <ion-nav-view name="contact-tab"></ion-nav-view>
+        </ion-tab>
+      </ion-tabs>
+      
+    </ion-pane>
+  </ion-view>
+</script>
+
+<script type="text/ng-template" id="restaurant-home.html">
+  <ion-view title="Home">
+    <ion-content>
+      
+      <h1>Home</h1>
+      this is Home
+    </ion-content>
+  </ion-view>
+</script>
+
+<script type="text/ng-template" id="restaurant-menu.html">
+  <ion-view title="Menu">
+    <ion-content>
+      
+      <h1>Menu</h1>
+      this is Menu
+    </ion-content>
+  </ion-view>
+</script>
+
+<script type="text/ng-template" id="restaurant-contact.html">
+  <ion-view title="Contact">
+    <ion-content>
+      
+      <h1>Contact</h1>
+      this is Contact
+    </ion-content>
+  </ion-view>
+</script>
+
+<script>
+var app = angular.module('ionicApp', ['ionic', 'ui.router']);
+
+app.config(function($stateProvider, $urlRouterProvider) {
+  
+  $stateProvider
+  .state('home', {
+    url: '/',
+    views: {
+      'main': {
+        templateUrl: 'home.html',
+        controller: 'HomeCtrl'
+      }
+    }
+  })
+  .state('country', {
+    url: '/country',
+    views: {
+      'main': {        
+        templateUrl: 'country.html',
+        controller: 'CountryCtrl'
+      }
+    }
+  })
+  .state('city', {
+    url: '/country/city',
+    views: {
+      'main': {
+        templateUrl: 'city.html',
+        controller: 'CityCtrl'
+      }
+    }
+  })
+  .state('restaurant', {
+    url: '/country/city/restaurant',
+    views: {
+      'main': {
+        templateUrl: 'restaurant.html',
+        controller: 'RestaurantCtrl'
+      }
+    }
+  })
+  .state('restaurant-home', {
+    url: '/country/city/restaurant/home',
+    views: {
+      'home-tab': {
+        templateUrl: 'restaurant-home.html'
+      }
+    }
+  })
+  .state('restaurant-menu', {
+    url: '/country/city/restaurant/menu',
+    views: {
+      'menu-tab': {
+        templateUrl: 'restaurant-menu.html'
+      }
+    }
+  })
+  .state('restaurant-contact', {
+    url: '/country/city/restaurant/contact',
+    views: {
+      'contact-tab': {
+        templateUrl: 'restaurant-contact.html'
+      }
+    }
+  });
+  
+  $urlRouterProvider.otherwise('/');
+});
+
+app.controller('HomeCtrl', function($scope){
+  $scope.countries = [
+    { id: 1, name: 'Country A' },
+    { id: 2, name: 'Country B' },
+    { id: 3, name: 'Country C' },
+    { id: 4, name: 'Country D' },
+    { id: 5, name: 'Country E' },
+    { id: 6, name: 'Country F' },
+    { id: 7, name: 'Country G' }
+  ];
+});
+
+app.controller('CountryCtrl', function($scope){
+  $scope.cities = [
+    { id: 1, name: 'City 1' },
+    { id: 2, name: 'City 2' },
+    { id: 3, name: 'City 3' },
+    { id: 4, name: 'City 4' },
+    { id: 5, name: 'City 5' }
+  ];
+});
+
+app.controller('CityCtrl', function($scope){
+  $scope.restaurants = [
+    { id: 1, name: 'Restaurant I' },
+    { id: 2, name: 'Restaurant II' },
+    { id: 3, name: 'Restaurant III' },
+    { id: 4, name: 'Restaurant IV' },
+    { id: 5, name: 'Restaurant V' },
+    { id: 6, name: 'Restaurant VI' },
+    { id: 7, name: 'Restaurant VII' }
+  ];
+});
+
+app.controller('RestaurantCtrl', function($scope, $stateParams){
+  
+});
+    
+</script>

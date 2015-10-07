@@ -1,0 +1,42 @@
+<ion-view hide-nav-bar="true" id="login">
+    <ion-pane>
+        <div class="ui grid">
+            <div class="sixteen wide column top-content">
+                <div class="ui grid centered">
+                    <div class="ten wide column">
+                        <img class="ui fluid image margin-vertical-xlg margin-top-xxlg" id="logo" src="img/logo@2x.png">
+                    </div>
+                </div>
+            </div>
+            <div class="section-separator"></div>
+            <div class="sixteen wide column">
+                <h3 class="form-title text-center">Road Show<br/>Management</h3>
+                <form ng-submit="" class="margin-top-md" novalidate name="loginForm">
+                    <div class="ui grid centered">
+                        <div class="row">
+                            <div class="twelve wide column centered">
+                                <div class="ui input fluid">
+                                    <input type="text" ng-model="username" placeholder="User Name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="twelve wide column">
+                                <div class="ui input fluid">
+                                    <input type="password" ng-model="password" placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="six wide column ">
+                                <a ng-click="submit()" class="ui button fluid">
+                                    LOGIN
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </ion-pane>
+</ion-view>

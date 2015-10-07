@@ -1,0 +1,439 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #387ef5 !default;
+$calm:                            #11c1f3 !default;
+$balanced:                        #33cd5f !default;
+$energized:                       #ffc900 !default;
+$assertive:                       #ef473a !default;
+$royal:                           #886aea !default;
+$dark:                            #444 !default;
+*/
+
+$brown: #696057 !default; //login form section separator bg, topbar content separator bg
+$dark: #231F20 !default; //login logo bg, topbar bg, bottombar bg
+$gray: #404041 !default; //login form bg
+$gray2: #4C4C4C  !default; //login form edit text
+$gray3: #898B8E !default; //topbar date text
+$light2: #E5E5E5 !default; //login form edit text bg
+$light3: #FFFFFF !default; //events white font, bottombar text
+$white: #FFFEFE !default; //login form button text, topbar title text
+$pink-deep:#951b50 !default; //login form button bg gradient bottom
+$pink-light:#ce1f70 !default; //login form button bg gradient top
+$green:#8CC63E !default; //ongoing theme color
+$yellow:#FFD600 !default; //pending theme color
+$red:#ED1C24 !default; //closed theme color
+$red-deep:#75191B !default; //percentage field property bg
+$brown-deep:#9C8461 !default; //percentage field value bg
+
+$form-input-text-bg: $light2;
+$form-input-text-color: $gray2;
+$form-btn-bg-gradient-start: $pink-deep;
+$form-btn-bg-gradient-end: $pink-light;
+
+$section-separator-bg: $brown;
+$top-content-bg: $dark;
+$content-bg: $gray;
+
+$percentage-field-border-color: $white;
+$percentage-field-property-bg: $red-deep;
+$percentage-field-property-text-color: $light3;
+$percentage-field-value-bg: $brown-deep;
+$percentage-field-value-text-color: $light3;
+
+$bar-bg: $dark;
+$bar-text-color:$light3;
+$bar-subtext-color: $gray3;
+
+$event-ongoing-theme:$green;
+$event-pending-theme:$yellow;
+$event-closed-theme:$red;
+
+$item-default-active-bg:lighten( $gray, 10% ) !default;
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
+/* ==========================================================================
+   Utility
+   ========================================================================== */
+//[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+//  display: none !important;
+//}
+*{
+//    border:solid 1px red !important;
+}
+
+
+@mixin create-color($word, $css) {
+    .#{$word}-light {
+        #{$css}:$light;   
+    }
+    .#{$word}-stable {
+        #{$css}:$stable;   
+    }
+    .#{$word}-positive {
+        #{$css}:$positive;   
+    }
+    .#{$word}-calm {
+        #{$css}:$calm;   
+    }
+    .#{$word}-balanced {
+        #{$css}:$balanced;   
+    }
+    .#{$word}-energized {
+        #{$css}:$energized;   
+    }
+    .#{$word}-assertive {
+        #{$css}:$assertive;   
+    }
+    .#{$word}-royal {
+        #{$css}:$royal;   
+    }
+    .#{$word}-dark {
+        #{$css}:$dark;   
+    }
+}
+
+@mixin create-margin($word, $value) {
+    .margin-#{$word} {
+        margin:$value;   
+    }
+
+    .margin-top-#{$word} {
+        margin-top:$value;   
+    }
+
+    .margin-bottom-#{$word} {
+        margin-bottom:$value;   
+    }
+
+    .margin-left-#{$word} {
+        margin-left:$value;   
+    }
+
+    .margin-right-#{$word} {
+        margin-right:$value;   
+    }
+
+    .margin-horizontal-#{$word} {
+        margin-left: $value;
+        margin-right: $value;
+    }
+
+    .margin-vertical-#{$word} {
+        margin-top: $value;
+        margin-bottom: $value;
+    }
+}
+
+@mixin create-padding($word, $value) {
+    .padding-#{$word} {
+        padding:$value;   
+    }
+
+    .padding-top-#{$word} {
+        padding-top:$value;   
+    }
+
+    .padding-bottom-#{$word} { 
+        padding-bottom:$value;   
+    }
+
+    .padding-left-#{$word} {
+        padding-left:$value;   
+    }
+
+    .padding-right-#{$word} {
+        padding-right:$value;   
+    }
+
+    .padding-horizontal-#{$word} {
+        padding-left: $value;
+        padding-right: $value;
+    }
+
+    .padding-vertical-#{$word} {
+        padding-top: $value;
+        padding-bottom: $value;
+    }
+}
+
+@include create-color('bg', background-color);
+@include create-color('text', color);
+
+@include create-padding('0', 0px);
+@include create-padding('xxxs', 2px);
+@include create-padding('xxs', 5px);
+@include create-padding('xs', 10px);
+@include create-padding('md', 20px);
+@include create-padding('lg', 40px);
+@include create-padding('xlg', 60px);
+@include create-padding('xxlg', 90px);
+
+@include create-margin('0', 0px);
+@include create-margin('xxxs', 2px);
+@include create-margin('xxs', 5px);
+@include create-margin('xs', 10px);
+@include create-margin('md', 20px);
+@include create-margin('lg', 40px);
+@include create-margin('xlg', 60px);
+@include create-margin('xxlg', 90px);
+
+.full-width {
+    width:100%;   
+}
+.full-height {
+    height:100%;   
+}
+.font-bold {
+    font-weight:900;   
+}
+.nowrap {
+    display: inline-block;
+}
+.responsive-container {
+    position: relative;
+    >canvas:first-child {
+        position: relative;
+        width: 100%;
+        height: auto;
+        z-index: 1;
+    }
+    >.responsive-content {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+    }
+}
+.circle {
+    border-radius: 50%;
+}
+.pointer-events-none {
+    pointer-events: none;   
+}
+.text-left {
+    text-align:left;   
+}
+.text-right {
+    text-align:right;   
+}
+.text-center {
+    text-align:center;   
+}
+.block-center {
+    margin-left:auto;
+    margin-right:auto;
+}
+/*========================================================
+Semantic UI Override
+========================================================*/
+body {
+    .ui.grid>.row {
+        padding-top:0.8em;
+        padding-bottom:0.8em;
+    }
+}
+/*========================================================
+All Page Layout
+========================================================*/
+.content {
+//    max-width:480px;   
+//    margin:0 auto !important;
+    @extend .padding-bottom-lg;
+}
+ion-content {
+    background-color:$content-bg;
+}
+ion-list ion-item {
+       
+}
+.pic {
+    color: $percentage-field-value-text-color;
+    @extend .margin-bottom-xxs;   
+}
+.highlight-number-field {
+    .property {
+        font-size:1.2em;
+        line-height:1.3em;
+    }
+    .value {
+        font-size:1.8em;
+        line-height:1.3em;
+    }
+}
+.percentage-field {
+    color: $percentage-field-value-text-color;
+    border:solid 1px $percentage-field-border-color;
+    .property {
+        background-color: $percentage-field-property-bg;
+        @extend .padding-xxs;
+        font-size:0.8em;
+        line-height:1.2em;
+        @extend .text-center;
+    }
+    .value {
+        background-color: $percentage-field-value-bg;
+        @extend .padding-xxs;
+        font-size:1.4em;
+        line-height:1.2em;
+        @extend .text-center;
+    }
+    &:not(:last-child) {
+        @extend .margin-bottom-xs;
+    }
+}
+.event-statuses {
+    @media screen and (max-width:380px) {
+        font-size:0.8em;   
+    }
+    
+    color:$bar-text-color;
+    .status-color {
+        width:20px;
+        height:20px;
+        position:relative;
+        top:5px;
+        @extend .margin-right-xxs;
+        
+        
+    }
+    .column {
+        @extend .text-center;
+        .status-color, .status-text {
+            
+        }
+        
+        .status-color {
+            opacity:0.25;   
+        }
+        &.on .status-color {
+            opacity:1;   
+        }
+    }
+}
+
+ion-item.item {
+    color:$light3;
+    background:transparent;
+}
+ion-item.agent-summary, ion-item.agent-summary-header, ion-item.agent-summary-footer {
+    font-size:0.9em;   
+    .ui.grid>.column:not(.row)  {
+        padding:0.5rem;  
+    }
+}
+ion-item.agent-summary-footer {
+    font-size:1.2em;   
+}
+ion-item.agent-summary-header, ion-item.agent-summary-footer {
+    background-color:#333;
+}
+ion-item.agent-summary {
+    .ui.grid>.column:not(.row)  { 
+        white-space:normal;
+    }
+}
+ion-item.event-summary {
+    
+    @media screen and (max-width:380px) {
+        font-size:0.8em;   
+    }
+    
+    background-color:transparent;
+    border-radius: 20px;
+    border-width: 3px;
+    @extend .margin-horizontal-xs;
+    @extend .margin-top-xs;
+    
+    hr {
+        border:0;
+        height:2px;
+    }
+    
+    &.event-ongoing {
+        color:$event-ongoing-theme;
+        hr {
+            background-color:$event-ongoing-theme;
+        }
+        border-color: $event-ongoing-theme;
+    }
+    &.event-closed {
+        color:$event-closed-theme;
+        hr {
+            background-color:$event-closed-theme;
+        }
+        border-color: $event-closed-theme;
+    }
+    &.event-pending {
+        color:$event-pending-theme;
+        hr {
+            background-color:$event-pending-theme;
+        }
+        border-color: $event-pending-theme;
+    }
+}
+
+
+
+.section-separator {
+    height:3px;
+    width:100%;
+    background-color:$section-separator-bg;
+}
+body {
+    .ui.button {
+        background: #1e5799; /* Old browsers */
+        background: -moz-linear-gradient(bottom, $form-btn-bg-gradient-start 0%, $form-btn-bg-gradient-end 100%); /* FF3.6+ */
+        background: -webkit-gradient(bottom, left top, left bottom, color-stop(0%,$form-btn-bg-gradient-start), color-stop(100%,$form-btn-bg-gradient-end)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(bottom, $form-btn-bg-gradient-start 0%, $form-btn-bg-gradient-end 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(bottom, $form-btn-bg-gradient-start 0%, $form-btn-bg-gradient-end 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(bottom, $form-btn-bg-gradient-start 0%, $form-btn-bg-gradient-end 100%); /* IE10+ */
+        background: linear-gradient(to top, $form-btn-bg-gradient-start 0%, $form-btn-bg-gradient-end 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$form-btn-bg-gradient-start, endColorstr=$form-btn-bg-gradient-end,GradientType=0 ); /* IE6-9 */
+        
+        color:$light3;
+    }
+}
+
+.tabbed-slidebox .tsb-icons:after{
+    display:none;
+}
+
+/*========================================================
+Page Layout
+========================================================*/
+#login {
+    #logo {
+    }
+    ion-pane {
+        background-color: $content-bg;
+    }
+    .top-content {
+        background-color: $top-content-bg;  
+    }
+    .form-title {
+        color:$light3;
+        font-size:2.2em;
+    }
+    
+    * {
+//        @extend .debug-border;   
+    }
+}
+
+#events {
+    ion-content ion-item * {
+//        @extend .debug-border;   
+    }
+}

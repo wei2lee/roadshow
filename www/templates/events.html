@@ -1,0 +1,51 @@
+<ion-view id="events" view-title="Events">
+    <ion-content class="has-header">
+        <ion-list>
+            <ion-item ng-repeat="event in events | filter:filterStatus" 
+                      class="event-summary" 
+                      ng-class="{'event-ongoing':event.RoadShow.status=='ongoing', 'event-pending':event.RoadShow.status=='pending', 'event-closed':event.RoadShow.status=='closed'}"
+                      ng-click="click(event)"
+                      >
+                
+                <div class="ui grid">
+                    <div class="eleven wide column">
+                        <div class="timeline">Date: {{event.RoadShow.timeline || '-'}}</div>
+                        <div class="venue">Venue: {{event.RoadShow.Venue || '-'}}</div>
+                        <hr>
+                        <div class="highlight-number-field">
+                            <div class="property">Sale Target:</div>
+                            <div class="value">{{(event.RoadShow.SalesTarget || 0) | currency : 'RM ' : 0}}</div>
+                        </div>
+                        <div class="highlight-number-field">
+                            <div class="property">Sale Value:</div>
+                            <div class="value">{{(event.RoadShow.TotalSaleInPeriod || 0) | currency : 'RM ' : 0 }}</div>
+                        </div>
+                        <div class="highlight-number-field">
+                            <div class="property">Event Cost:</div>
+                            <div class="value">{{(event.RoadShow.EventCost || 0) | currency : 'RM ' : 0 }}</div>
+                        </div>
+                    </div>
+                    <div class="five wide column">
+                        <div class="pic" style="white-space:normal">PIC: {{event.RoadShow.PersonInCharge.FullName || '-'}}</div>
+                        <div class="percentage-field">
+                            <div class="property">E.Q.</div>
+                            <div class="value">{{(event.RoadShow.eqInPeriod || '0.0%')}}</div>
+                        </div>
+                        <div class="percentage-field">
+                            <div class="property">TARGET</div>
+                            <div class="value">{{(event.RoadShow.salesPercentageInPeriod || '0.0%')}}</div>
+                        </div>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+    <ion-footer-bar class="bar-dark">
+        <div class="ui grid three column event-statuses full-width">
+            <div class="column" ng-repeat="status in statuses" ng-click="status.on = !status.on" ng-class="{'on':status.on}">
+                <span class="status-color" style="display:inline-block;" ng-style="{'background-color':status.color}"></span>
+                <span class="status-text">{{status.name}}</span>
+            </div>
+        </div>
+    </ion-footer-bar>
+</ion-view>
