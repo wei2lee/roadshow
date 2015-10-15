@@ -29,7 +29,7 @@
                     }
                 }
             })
-            .state('event-agents', {
+            .state('eventagents', {
                 url: '/agents',
                 views: {
                     'agents-tab': {
@@ -38,7 +38,7 @@
                     }
                 }
             })
-            .state('event-costitems', {
+            .state('eventcostitems', {
                 url: '/costitems',
                 views: {
                     'costitems-tab': {
@@ -48,10 +48,24 @@
                 }
             })
 
-        .state('tab-content', {
+        .state('agents-event', {
             url: '/agents-event/{id}',
-            templateUrl: 'templates/agents-event.html',
-            controller: 'AgentsEventCtrl'
+            views: {
+                'main': {
+                    templateUrl: 'templates/agents-event.html',
+                    controller: 'AgentsEventCtrl'
+                }
+            }
+        })
+        
+        .state('costitems-event', {
+            url: '/costitems-event/{id}',
+            views: {
+                'main': {
+                    templateUrl: 'templates/costitems-event.html',
+                    controller: 'CostItemsEventCtrl'
+                }
+            }
         })
 
 
@@ -61,3 +75,5 @@
 })();
 
 //http://codepen.io/markbeekman/pen/ogwqax
+
+//http://codepen.io/gnomeontherun/pen/encAb

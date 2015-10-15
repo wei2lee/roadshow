@@ -1,12 +1,14 @@
 (function() {
     var _module = angular.module('controller');
-    _module.controller('LoginCtrl', function($scope, $state, $timeout, $ionicScrollDelegate, ControllerBase, u, apiUser) {
+    _module.controller('LoginCtrl', function(App,$scope, $state, $timeout, $ionicScrollDelegate, ControllerBase, u, apiUser, checkAppVersion) {
+        $scope.App = App;
         ControllerBase($scope, $ionicScrollDelegate, 'login');
         $scope.$on('$ionicView.beforeEnter', function (viewInfo, state) {
             $scope.beforeEnter(viewInfo, state);
             if(state.direction != 'back') {
-                $scope.username = '';
-                $scope.password = '';
+                $scope.loginData = {};
+                $scope.loginData.username = '';
+                $scope.loginData.password = '';
             }
         });
         $scope.$on('$ionicView.afterEnter', function (viewInfo, state) {
@@ -17,13 +19,17 @@
         });
         $scope.submit = function() {
             u.loading.show();
-            apiUser.login($scope.username, $scope.password).then(function(result) {
+            apiUser.login($scope.loginData.username, $scope.loginData.password).then(function(result) {
                 $state.go('events');
             }).catch(function(error) {
                 u.alert.showError(error);
             }).finally(function() {
                 u.loading.hide(); 
             });
+        }
+        $scope.download = function() {
+             checkAppVersion.downloadApp();  
+//            checkAppVersion.check();
         }
     });            
 })();

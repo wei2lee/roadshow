@@ -32,7 +32,7 @@
         $scope.$on('$ionicView.afterEnter', function (viewInfo, state) {
             $scope.afterEnter(viewInfo, state);
             if (state.direction != 'back') {
-//                u.loading.show();
+                u.loading.show();
                 var id = $state.params.id || (App.event?App.event.EventId:undefined);
                 apiEvent.useCache().getById(id).then(function (result) {
                     
@@ -41,7 +41,7 @@
                 }).catch(function (error) {
                     u.alert.showError(error);
                 }).finally(function () {
-//                    u.loading.hide();
+                    u.loading.hide();
                 });
             }
         });

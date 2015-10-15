@@ -222,6 +222,40 @@
     _module.service('apiEvent', function($q,u,APIServiceBaseWithToken) {
         function api(){}
         api.prototype = new APIServiceBaseWithToken();
+        api.prototype.processModel = function(o) {
+            o.RoadShow.StartDate = new Date(o.RoadShow.StartDate);
+            o.RoadShow.EndDateTime  = new Date(o.RoadShow.EndDateTime);
+            Object.defineProperty(o.RoadShow, 'status', {
+                get: function () {
+                    var now = Date.now();
+                    if(now < this.StartDate.getTime()) return 'pending';
+                    else if(now > this.EndDateTime.getTime()) return 'closed';
+                    else return 'ongoing';
+                }
+            });
+            Object.defineProperty(o.RoadShow, 'timeline', {
+                get: function () {
+                    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                    return this.StartDate.getDate() + ' ' + months[this.StartDate.getMonth()] + ' - ' + this.EndDateTime.getDate() + ' ' + months[this.EndDateTime.getMonth()] + ' ' + this.EndDateTime.getFullYear();
+                }
+            });
+            Object.defineProperty(o.RoadShow, 'eqInPeriod', {
+                get: function () {
+                    var eqip = this.EQInPeriod || 0;
+                    eqip = Math.min(Math.max(0, eqip),1);
+                    if(eqip < 0.01) return sprintf("%.1f%%", eqip*100);
+                    else { return sprintf("%.0f%%", eqip*100); }
+                }
+            });
+            Object.defineProperty(o.RoadShow, 'salesPercentageInPeriod', {
+                get: function () {
+                    var spip = (!this.TotalSaleInPeriod || !this.SalesTarget)  ? 0 : this.TotalSaleInPeriod / this.SalesTarget;
+                    spip = Math.min(Math.max(0, spip),1);
+                    if(spip < 0.01) return sprintf("%.1f%%", spip*100);
+                    else { return sprintf("%.0f%%", spip*100); }
+                }
+            });
+        }
         api.prototype.getAll = function() {
             var _self = this;
             return this.withToken(function(){
@@ -230,38 +264,7 @@
                 })
             }).then(function(data){
                 _self.values = _.each(data, function(o) {
-                    o.RoadShow.StartDate = new Date(o.RoadShow.StartDate);
-                    o.RoadShow.EndDateTime  = new Date(o.RoadShow.EndDateTime);
-                    Object.defineProperty(o.RoadShow, 'status', {
-                        get: function () {
-                            var now = Date.now();
-                            if(now < this.StartDate.getTime()) return 'pending';
-                            else if(now > this.EndDateTime.getTime()) return 'closed';
-                            else return 'ongoing';
-                        }
-                    });
-                    Object.defineProperty(o.RoadShow, 'timeline', {
-                        get: function () {
-                            var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-                            return this.StartDate.getDate() + ' ' + months[this.StartDate.getMonth()] + ' - ' + this.EndDateTime.getDate() + ' ' + months[this.EndDateTime.getMonth()] + ' ' + this.EndDateTime.getFullYear();
-                        }
-                    });
-                    Object.defineProperty(o.RoadShow, 'eqInPeriod', {
-                        get: function () {
-                            var eqip = eqip || 0;
-                            eqip = Math.min(Math.max(0, eqip),1);
-                            if(eqip < 0.01) return sprintf("%.1f%%", eqip*100);
-                            else { return sprintf("%.0f%%", eqip*100); }
-                        }
-                    });
-                    Object.defineProperty(o.RoadShow, 'salesPercentageInPeriod', {
-                        get: function () {
-                            var spip = (!this.TotalSaleInPeriod || !this.SalesTarget)  ? 0 : this.TotalSaleInPeriod / this.SalesTarget;
-                            spip = Math.min(Math.max(0, spip),1);
-                            if(spip < 0.01) return sprintf("%.1f%%", spip*100);
-                            else { return sprintf("%.0f%%", spip*100); }
-                        }
-                    });
+                    _self.processModel(o);
                 });
                 return data;
             });
@@ -285,38 +288,7 @@
                         headers:{Authorization:'Bearer '+_self.apiService.token.access_token}
                     }).done(function(data, textStatus, jqXHR) {
                         var found = data;
-                        found.RoadShow.StartDate = new Date(found.RoadShow.StartDate);
-                        found.RoadShow.EndDateTime  = new Date(found.RoadShow.EndDateTime);
-                        Object.defineProperty(found.RoadShow, 'status', {
-                            get: function () {
-                                var now = Date.now();
-                                if(now < this.StartDate.getTime()) return 'pending';
-                                else if(now > this.EndDate.getTime()) return 'closed';
-                                else return 'ongoing';
-                            }
-                        });
-                        Object.defineProperty(found.RoadShow, 'timeline', {
-                            get: function () {
-                                var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-                                return this.StartDate.getDate() + ' ' + months[this.StartDate.getMonth()] + ' - ' + this.EndDateTime.getDate() + months[this.EndDateTime.getMonth()] + ' ' + this.EndDateTime.getYear();
-                            }
-                        });
-                        Object.defineProperty(found.RoadShow, 'eqInPeriod', {
-                            get: function () {
-                                var eqip = eqip || 0;
-                                eqip = Math.min(Math.max(0, eqip),1);
-                                if(eqip < 0.01) return sprintf("%.1f%%", eqip*100);
-                                else { return sprintf("%.0f%%", eqip*100); }
-                            }
-                        });
-                        Object.defineProperty(found.RoadShow, 'salesPercentageInPeriod', {
-                            get: function () {
-                                var spip = (!this.TotalSaleInPeriod || !this.SalesTarget) ? 0 : this.TotalSaleInPeriod / this.SalesTarget;
-                                spip = Math.min(Math.max(0, this.spip),100);
-                                if(spip < 0.01) return sprintf("%.1f%%", spip*100);
-                                else { return sprintf("%.0f%%", spip*100); }
-                            }
-                        });
+                        _self.processModel(found);
                         return data;
                     });
                 })

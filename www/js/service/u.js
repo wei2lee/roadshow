@@ -1,17 +1,18 @@
 (function () {
-    var _module = angular.module('u', ['API']);
+    var _module = angular.module('u', ['value']);
 
-    _module.service('u', function ($ionicLoading,$ionicPopup) {
+    _module.service('u', function ($ionicLoading,Popup) {
 
         this.SemanticVersion = function (str) {
-            this.major = 0;
-            this.minor = 0;
-            this.patch = 0;
+            var ret = {};
+            ret.major = 0;
+            ret.minor = 0;
+            ret.patch = 0;
 
             var splits = str.split('.');
-            this.major = splits.length > 0 ? parseInt(splits[0]) : 0;
-            this.minor = splits.length > 1 ? parseInt(splits[1]) : 0;
-            this.patch = splits.length > 2 ? parseInt(splits[2]) : 0;
+            ret.major = splits.length > 0 ? parseInt(splits[0]) : 0;
+            ret.minor = splits.length > 1 ? parseInt(splits[1]) : 0;
+            ret.patch = splits.length > 2 ? parseInt(splits[2]) : 0;
 
             function compareInt(left, right) {
                 if (left == right) return 0;
@@ -20,11 +21,12 @@
             }
 
 
-            this.compare = function (right) {
+            ret.compare = function (right) {
+                var left = this;
                 var compareResult = [
-                    compareInt(right.major, left.major),
-                    compareInt(right.minor, left.minor),
-                    compareInt(right.patch, left.patch)
+                    compareInt(left.major, right.major),
+                    compareInt(left.minor, right.minor),
+                    compareInt(left.patch, right.patch)
                 ];
                 if (compareResult[0] == 0) {
                     if (compareResult[1] == 0) {
@@ -36,6 +38,10 @@
                     return compareResult[0];
                 }
             }
+            ret.toString = function() {
+                return this.major + '.' + this.minor + '.' + this.patch;   
+            }
+            return ret;
         }
 
         this.Error = function (str) {
@@ -53,14 +59,12 @@
             ClientApplication: 'ClientApplication',
             ClientHTTP: 'ClientHTTP'
         }
-
-        this.checkAppVersoin = function () {
-
-        }
+        
         this.loading = {};
         this.loading.show = function () {
             $ionicLoading.show({
-                template: 'Loading...'
+                template: 'Loading...',
+                delay:200
             });
         };
         this.loading.hide = function () {
@@ -69,7 +73,7 @@
         
         this.alert = {};
         this.alert.showError = function(error) {
-            var alertPopup = $ionicPopup.alert({
+            var alertPopup = Popup.alert({
                 'title': error.description,
                 'buttons': [{
                     'text': 'Close',

@@ -34,6 +34,10 @@
             }
             return ret;
         }
+        $scope.navigateToCost = function() {
+            var id = $state.params.id || (App.event?App.event.EventId:undefined);
+            $state.go('costitems-event', {'id':id});   
+        }
         
         
         $scope.click = function (agent) {
@@ -78,7 +82,7 @@
         $scope.$on('$ionicView.afterEnter', function (viewInfo, state) {
             $scope.afterEnter(viewInfo, state);
             if (state.direction != 'back') {
-//                u.loading.show();
+                u.loading.show();
                 var id = $state.params.id || (App.event?App.event.EventId:undefined);
                 apiEvent.useCache().getById(id).then(function (result) {
                     $scope.agents = result.RoadShow.AgentModelList;
@@ -90,7 +94,7 @@
                 }).catch(function (error) {
                     u.alert.showError(error);
                 }).finally(function () {
-//                    u.loading.hide();
+                    u.loading.hide();
                 });
             }
         });

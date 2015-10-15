@@ -14,7 +14,8 @@
         }
         $scope.click = function(event) {
             App.event = event;
-            $state.go('event', {id:event.EventId});
+            //$state.go('event', {id:event.EventId});
+            $state.go('agents-event', {id:event.EventId});
         }
         
         $scope.statuses = [

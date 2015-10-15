@@ -3,6 +3,7 @@
     _module.value('App', {
         versionNumber:"0.0.0",
         versionCode:0,
+        minimumCheckAppVersionTimeSpan:24*3600
     }).value('APIService', {
         token:{},
         apiBase:'http://103.9.149.59:8034/',
